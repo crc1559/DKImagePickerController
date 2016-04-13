@@ -291,6 +291,7 @@ public class DKImagePickerController : UINavigationController {
 	
 	private func createCamera() -> UIViewController {
 		
+		self.selectedAssets = []
 		let didCancel = { () in
 			if self.viewControllers.count == 0 {
 				self.dismissViewControllerAnimated(true, completion: nil);
@@ -362,8 +363,10 @@ public class DKImagePickerController : UINavigationController {
 	}
 	
     internal func done() {
-		self.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        self.didSelectAssets?(assets: self.selectedAssets)
+	if (self.selectedAssets.count > 0) {
+             self.dismissViewControllerAnimated(true, completion: nil)
+             self.didSelectAssets?(assets: self.selectedAssets)
+        }
     }
     
     // MARK: - Selection Image
